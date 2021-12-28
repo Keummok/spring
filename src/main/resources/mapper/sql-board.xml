@@ -15,4 +15,24 @@
 			ORDER BY board_idx DESC
 		]]>
 	</select>
+	<insert id="insertBoard">
+		<![CDATA[
+			INSERT INTO T_BOARD
+			(
+				BOARD_IDX,
+				title,
+				contents,
+				created_datetime,
+				creator_id
+			)
+			VALUES 
+			(
+				(SELECT TO_NUMBER(MAX(BOARD_IDX)+1) FROM T_BOARD),
+				#{title},
+				#{contents},
+				SYSDATE,
+				'admin'
+			)
+		]]>	
+	</insert>
 </mapper>
